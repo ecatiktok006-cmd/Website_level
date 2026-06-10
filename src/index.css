@@ -1,0 +1,106 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Playfair+Display:wght@500;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #26170c;
+  --color-on-primary: #ffffff;
+  --color-primary-container: #3d2b1f;
+  --color-on-primary-container: #ac9181;
+  --color-inverse-primary: #dec1af;
+  --color-secondary: #7d562d;
+  --color-on-secondary: #ffffff;
+  --color-secondary-container: #ffca98;
+  --color-on-secondary-container: #7a532a;
+  --color-tertiary: #151d02;
+  --color-on-tertiary: #ffffff;
+  --color-tertiary-container: #2a3212;
+  --color-on-tertiary-container: #919b72;
+  --color-background: #faf9f6;
+  --color-on-background: #1a1c1a;
+  --color-surface: #faf9f6;
+  --color-on-surface: #1a1c1a;
+  --color-surface-variant: #e3e2e0;
+  --color-on-surface-variant: #4f453f;
+  --color-surface-dim: #dbdad7;
+  --color-surface-bright: #faf9f6;
+  --color-surface-container-lowest: #ffffff;
+  --color-surface-container-low: #f4f3f1;
+  --color-surface-container: #efeeeb;
+  --color-surface-container-high: #e9e8e5;
+  --color-surface-container-highest: #e3e2e0;
+
+  --color-primary-fixed: #fbddca;
+  --color-secondary-fixed: #ffdcbd;
+
+  --font-headline-lg: "Playfair Display", serif;
+  --font-headline-md: "Playfair Display", serif;
+  --font-display-lg: "Playfair Display", serif;
+  --font-body-md: "Inter", sans-serif;
+  --font-body-lg: "Inter", sans-serif;
+  --font-label-caps: "Inter", sans-serif;
+
+  --spacing-container-max: 1280px;
+  --spacing-stack-sm: 8px;
+  --spacing-gutter: 24px;
+  --spacing-section-gap: 120px;
+  --spacing-stack-lg: 32px;
+  --spacing-margin-mobile: 20px;
+  --spacing-margin-desktop: 64px;
+  --spacing-stack-md: 16px;
+}
+
+@utility shadow-ambient {
+  box-shadow: 0 10px 30px -5px rgba(61, 43, 31, 0.04);
+}
+@utility shadow-ambient-hover {
+  &:hover {
+    box-shadow: 0 20px 40px -5px rgba(61, 43, 31, 0.06);
+    transform: translateY(-2px);
+  }
+}
+
+@utility text-headline-lg {
+  font-family: theme('fontFamily.headline-lg');
+  font-size: 48px;
+  line-height: 1.2;
+  font-weight: 600;
+}
+@utility text-headline-lg-mobile {
+  font-family: theme('fontFamily.headline-lg');
+  font-size: 32px;
+  line-height: 1.2;
+  font-weight: 600;
+}
+@utility text-display-lg {
+  font-family: theme('fontFamily.display-lg');
+  font-size: 64px;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  font-weight: 700;
+}
+@utility text-headline-md {
+  font-family: theme('fontFamily.headline-md');
+  font-size: 32px;
+  line-height: 1.3;
+  font-weight: 500;
+}
+@utility text-body-lg {
+  font-family: theme('fontFamily.body-lg');
+  font-size: 18px;
+  line-height: 1.6;
+  font-weight: 400;
+}
+@utility text-body-md {
+  font-family: theme('fontFamily.body-md');
+  font-size: 16px;
+  line-height: 1.5;
+  font-weight: 400;
+}
+@utility text-label-caps {
+  font-family: theme('fontFamily.label-caps');
+  font-size: 12px;
+  line-height: 1.0;
+  letter-spacing: 0.1em;
+  font-weight: 600;
+}
+
