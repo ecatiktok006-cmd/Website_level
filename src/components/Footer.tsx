@@ -3,8 +3,8 @@ export default function Footer() {
     <footer className="bg-surface-container-low dark:bg-primary-container w-full px-margin-mobile md:px-margin-desktop py-stack-lg">
       <div className="flex flex-col items-center w-full gap-stack-lg max-w-container-max mx-auto">
         {/* Brand Logo */}
-        <a className="text-headline-md text-primary dark:text-on-primary-container font-semibold tracking-tight" href="#">
-          Artisanal Crumb
+        <a className="flex justify-center" href="#">
+          <img src="/logo.png" alt="Logo" className="h-10 w-auto object-contain grayscale opacity-80" />
         </a>
         
         {/* Links */}
@@ -17,7 +17,7 @@ export default function Footer() {
         
         {/* Copyright text */}
         <p className="font-body-md text-sm text-on-surface-variant dark:text-on-surface-variant opacity-80 mt-4">
-          © 2024 Artisanal Crumb. All rights reserved.
+          © 2024 by afzan. All rights reserved.
         </p>
       </div>
     </footer>
