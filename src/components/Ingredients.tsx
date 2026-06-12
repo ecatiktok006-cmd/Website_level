@@ -165,10 +165,10 @@ export default function Ingredients({ motionLevel }: IngredientsProps) {
 
   const galleryImages = [
     "/originalroll.png",
-    "/4chocolatehideout.jpg",
-    "/4swirlofhappiness.jpg",
-    "/4swirloforiginal.jpg",
-    "/4swirlofpremium.jpg"
+    "/4chocolatehideout.png",
+    "/4swirlofhappiness.png",
+    "/4swirloforiginal.png",
+    "/4swirlofpremium.png"
   ];
 
   useEffect(() => {

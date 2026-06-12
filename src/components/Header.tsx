@@ -22,18 +22,11 @@ export default function Header({ motionLevel, setMotionLevel }: HeaderProps) {
 
   const navLinks = [
     { 
-      href: '#core-four', 
-      label: 'The Menu',
+      href: '#menu-book-section', 
+      label: 'The Menu Book',
       dropdownItems: [
-        { href: '#menu-cinnamon-rolls-set', label: 'CINNAMON ROLLS SET' },
-        { href: '#menu-set-rahmah', label: 'SET RAHMAH JIMAT GILER!' },
-        { href: '#menu-cinnamon-rolls-alacarte', label: 'CINNAMON ROLLS ALA CARTE' },
-        { href: '#menu-bagels-untoasted', label: 'BAGELS(UNTOASTED)' },
-        { href: '#menu-schmear', label: 'SCHMEAR(CREAM CHEESE FOR BAGELS -50GM OF CHEESE)' },
-        { href: '#menu-bagels-toasted', label: 'BAGELS (TOASTED/READY TO EAT)' },
-        { href: '#menu-soft-cookies', label: 'SOFT COOKIES' },
-        { href: '#menu-cake', label: 'CAKE' },
-        { href: '#menu-drinks', label: 'DRINKS' },
+        { href: '#menu-book-section', label: 'SIGNATURE SWIRLS' },
+        { href: '#menu-book-section', label: 'CUSTOM BOX COMPOSITOR' },
       ]
     },
     { href: '#ingredients', label: 'Our Sourcing' },
@@ -143,7 +136,7 @@ export default function Header({ motionLevel, setMotionLevel }: HeaderProps) {
                       <div className="flex flex-col items-center gap-7 mt-4 w-full text-center">
                         {link.dropdownItems.map(item => (
                           <a 
-                            key={item.href} 
+                            key={item.label} 
                             href={item.href}
                             className="text-[15px] tracking-wide font-black uppercase text-[#5ce1e6] hover:text-[#45a4c0] hover:-translate-y-0.5 transition-all w-full block"
                           >
@@ -277,7 +270,7 @@ export default function Header({ motionLevel, setMotionLevel }: HeaderProps) {
                       <div className="flex flex-col pl-4 mt-1 border-l border-primary/10 ml-2">
                         {link.dropdownItems.map(item => (
                           <a
-                            key={item.href}
+                            key={item.label}
                             onClick={() => setMobileMenuOpen(false)}
                             href={item.href}
                             className="text-[#58CBEB] font-bold text-xs py-1.5 uppercase tracking-wider hover:text-[#45a4c0] hover:pl-1 transition-all"

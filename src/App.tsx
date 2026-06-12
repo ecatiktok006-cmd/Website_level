@@ -6,7 +6,6 @@
 import { useState, useEffect, useRef } from 'react';
 import Header from './components/Header';
 import Hero from './components/Hero';
-import CoreFour from './components/CoreFour';
 import BagelPromo from './components/BagelPromo';
 import Ingredients from './components/Ingredients';
 import Newsletter from './components/Newsletter';
@@ -178,7 +177,6 @@ export default function App() {
       <Header motionLevel={motionLevel} setMotionLevel={setMotionLevel} />
       <main>
         <Hero motionLevel={motionLevel} />
-        <CoreFour motionLevel={motionLevel} />
         <BagelPromo motionLevel={motionLevel} />
         <Ingredients motionLevel={motionLevel} />
         <Newsletter motionLevel={motionLevel} />
