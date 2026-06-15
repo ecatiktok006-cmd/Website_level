@@ -7,8 +7,6 @@ import { useState, useEffect, useRef } from 'react';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import BagelPromo from './components/BagelPromo';
-import Ingredients from './components/Ingredients';
-import Newsletter from './components/Newsletter';
 import Footer from './components/Footer';
 
 interface Particle {
@@ -178,8 +176,6 @@ export default function App() {
       <main>
         <Hero motionLevel={motionLevel} />
         <BagelPromo motionLevel={motionLevel} />
-        <Ingredients motionLevel={motionLevel} />
-        <Newsletter motionLevel={motionLevel} />
       </main>
       <Footer />
     </div>

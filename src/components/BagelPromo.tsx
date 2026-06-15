@@ -2,6 +2,7 @@ import React, { useRef, useState, useEffect } from 'react';
 import { motion, useScroll, useTransform, AnimatePresence } from 'motion/react';
 import { Sparkles, ArrowRight, ShoppingCart, Heart, ChevronLeft, ChevronRight, Check } from 'lucide-react';
 import bagelBg from '../assets/images/bagel_background_1781232798138.jpg';
+import Level4Book from './Level4Book';
 
 interface BagelPromoProps {
   motionLevel: number;
@@ -275,6 +276,16 @@ export default function BagelPromo({ motionLevel }: BagelPromoProps) {
         </motion.div>
 
         {/* Elegant Menu Book Container with 3D Book Layout */}
+        {motionLevel >= 4 ? (
+          <Level4Book
+            cinnamonRolls={cinnamonRolls}
+            customBox={customBox}
+            updateBoxCount={updateBoxCount}
+            totalBoxCount={totalBoxCount}
+            finalBoxPrice={finalBoxPrice}
+            setCustomBox={setCustomBox}
+          />
+        ) : (
         <div className="relative py-6 max-w-[1120px] mx-auto">
           
           {/* Leather Cover with paper-shadow and rounded profile edges */}
@@ -838,9 +849,16 @@ export default function BagelPromo({ motionLevel }: BagelPromoProps) {
                           </p>
                         </div>
 
-                        {/* Feature Image Header */}
+                        {/* Feature Video Header */}
                         <div className="w-full h-64 md:h-80 lg:h-[360px] rounded-2xl overflow-hidden relative mb-6 shadow-md border border-[#26170c]/10">
-                          <img src="/softcookies.png" alt="Soft Cookies Assortment" className="w-full h-full object-cover origin-center hover:scale-105 transition-transform duration-700" />
+                          <video 
+                            src="/redvelvetsoftcookies.mp4" 
+                            className="w-full h-full object-cover origin-center hover:scale-105 transition-transform duration-700" 
+                            autoPlay 
+                            loop 
+                            muted 
+                            playsInline 
+                          />
                           <div className="absolute inset-0 bg-gradient-to-t from-[#26170c]/90 via-[#26170c]/20 to-transparent flex flex-col justify-end p-4 md:p-6">
                             <span className="text-[10px] text-[#ffca98] font-mono uppercase tracking-widest font-bold mb-1 drop-shadow-md">Baked Daily</span>
                             <h4 className="text-white font-serif text-2xl md:text-3xl font-bold leading-tight drop-shadow-lg">Gourmet Cookie Collection</h4>
@@ -951,6 +969,7 @@ export default function BagelPromo({ motionLevel }: BagelPromoProps) {
             </div>
           </div>
         </div>
+        )}
 
         {/* Highlight Callout Badge */}
         <div className="mt-16 md:mt-20 flex justify-center text-center">
