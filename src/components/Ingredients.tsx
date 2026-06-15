@@ -445,9 +445,7 @@ export default function Ingredients({ motionLevel }: IngredientsProps) {
                 exit={motionLevel >= 4 ? { opacity: 0 } : undefined}
                 transition={{ duration: 0.5 }}
                 alt="Cinnamon roll close up" 
-                className={`absolute inset-0 w-full h-full object-cover select-none ${
-                  motionLevel === 5 ? 'scale-105 animate-[pulse_10s_infinite_ease-in-out]' : ''
-                }`}
+                className={`absolute inset-0 w-full h-full object-cover select-none`}
                 src={motionLevel >= 4 ? galleryImages[currentImageIndex] : "/originalroll.png"}
               />
             </AnimatePresence>
@@ -472,8 +470,8 @@ export default function Ingredients({ motionLevel }: IngredientsProps) {
                 <Check className="w-5 h-5 text-[#facc15] stroke-[3px]" />
                 <span className="font-mono text-[11px] font-bold uppercase tracking-widest mix-blend-screen text-shadow-sm">Heritage Mill</span>
               </motion.div>
-            ) : motionLevel >= 2 ? (
-              // Simple static badge for L2/L3
+            ) : (
+              // Simple static badge for L3
               <div className="absolute bottom-6 right-6 bg-white/95 text-primary px-4 py-2.5 rounded-2xl shadow-lg border border-[#D4A373]/20 flex items-center gap-2">
                 <Check className="w-4 h-4 text-secondary stroke-[3px]" />
                 <span className="font-mono text-[10px] font-bold uppercase tracking-wider">Heritage Mill Certified</span>

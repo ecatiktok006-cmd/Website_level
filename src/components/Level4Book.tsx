@@ -97,15 +97,7 @@ export default function Level4Book({
       
       {/* Background Atmosphere - Dark Wood/Cafe Ambiance */}
       <div 
-        className="absolute inset-0 pointer-events-none z-0"
-        style={{
-          backgroundColor: '#1E140D',
-          backgroundImage: "url('https://images.unsplash.com/photo-1555505019-8c3f1c4aba5f?auto=format&fit=crop&w=2000&q=80')",
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          opacity: 0.25,
-          mixBlendMode: 'luminosity'
-        }}
+        className="absolute inset-0 pointer-events-none z-0 bg-[#1E140D]"
       />
 
       <div className="relative z-20 w-full max-w-[1400px] flex justify-center items-center perspective-2000 p-1 md:p-8 rounded-lg">

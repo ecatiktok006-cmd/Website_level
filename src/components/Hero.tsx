@@ -169,106 +169,8 @@ export default function Hero({ motionLevel }: HeroProps) {
     setBtnCoords({ x: 0, y: 0 });
   };
 
-  // Canvas Particle Interactive Mesh (Level 5)
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [mousePos, setMousePos] = useState({ x: -1000, y: -1000 });
-
-  useEffect(() => {
-    if (motionLevel < 5 || !canvasRef.current || !containerRef.current) return;
-    const canvas = canvasRef.current;
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-
-    let animId: number;
-    let width = (canvas.width = containerRef.current.offsetWidth);
-    let height = (canvas.height = containerRef.current.offsetHeight);
-
-    const handleResize = () => {
-      if (!containerRef.current) return;
-      width = canvas.width = containerRef.current.offsetWidth;
-      height = canvas.height = containerRef.current.offsetHeight;
-    };
-    window.addEventListener('resize', handleResize);
-
-    // Seed floating organic cookie golden crumbs particles
-    const particlesCount = 45;
-    const particlesArray: Array<{
-      x: number;
-      y: number;
-      size: number;
-      speedX: number;
-      speedY: number;
-      color: string;
-      alpha: number;
-    }> = [];
-
-    for (let i = 0; i < particlesCount; i++) {
-      particlesArray.push({
-        x: Math.random() * width,
-        y: Math.random() * height,
-        size: Math.random() * 3 + 1,
-        speedX: (Math.random() - 0.5) * 0.6,
-        speedY: (Math.random() - 0.5) * 0.6,
-        color: `212, 163, 115`, // D4A373 RGB cookie golden tint
-        alpha: Math.random() * 0.5 + 0.2
-      });
-    }
-
-    const animateParticles = () => {
-      ctx.clearRect(0, 0, width, height);
-
-      particlesArray.forEach((p) => {
-        // Move organically
-        p.x += p.speedX;
-        p.y += p.speedY;
-
-        // Bounce back borders
-        if (p.x < 0 || p.x > width) p.speedX *= -1;
-        if (p.y < 0 || p.y > height) p.speedY *= -1;
-
-        // Gravity/pull attraction relative to interactive mouse moves
-        const dx = mousePos.x - p.x;
-        const dy = mousePos.y - p.y;
-        const dist = Math.hypot(dx, dy);
-
-        if (dist < 180) {
-          const force = (180 - dist) / 180;
-          // Soft magnetic pull particles toward mouse coordinate
-          p.x += (dx / dist) * force * 1.5;
-          p.y += (dy / dist) * force * 1.5;
-          ctx.beginPath();
-          ctx.strokeStyle = `rgba(${p.color}, ${force * 0.15})`;
-          ctx.lineWidth = 0.5;
-          ctx.moveTo(p.x, p.y);
-          ctx.lineTo(mousePos.x, mousePos.y);
-          ctx.stroke();
-        }
-
-        // Draw particle
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(${p.color}, ${p.alpha})`;
-        ctx.shadowBlur = dist < 120 ? 8 : 0;
-        ctx.shadowColor = `rgb(${p.color})`;
-        ctx.fill();
-        ctx.shadowBlur = 0; // reset
-      });
-
-      animId = requestAnimationFrame(animateParticles);
-    };
-
-    animateParticles();
-
-    return () => {
-      window.removeEventListener('resize', handleResize);
-      cancelAnimationFrame(animId);
-    };
-  }, [motionLevel, mousePos]);
-
   // Motion Variants Configuration
   const isL1 = motionLevel === 1;
-  const isL2 = motionLevel === 2;
   const isL3 = motionLevel === 3;
 
   if (isL3) {
@@ -280,7 +182,7 @@ export default function Hero({ motionLevel }: HeroProps) {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: motionLevel >= 3 ? 0.15 : motionLevel === 2 ? 0.08 : 0,
+        staggerChildren: motionLevel >= 3 ? 0.15 : 0,
         delayChildren: motionLevel >= 3 ? 0.15 : 0
       }
     }
@@ -296,8 +198,6 @@ export default function Hero({ motionLevel }: HeroProps) {
       y: 0,
       transition: motionLevel >= 4 
         ? { type: 'spring', stiffness: 80, damping: 12, mass: 0.6 }
-        : isL2 
-        ? { type: 'tween', ease: 'easeOut', duration: 0.8 } // Beautiful smooth tween slide up for Level 2
         : { duration: 0.5, ease: 'easeOut' } // Level 3 default
     }
   };
@@ -305,12 +205,6 @@ export default function Hero({ motionLevel }: HeroProps) {
   // Double check our hover scale configurations
   const getBtnHoverProps = () => {
     if (isL1) return {};
-    if (isL2) {
-      return {
-        whileHover: { scale: 1.03 },
-        transition: { type: 'tween', duration: 0.2, ease: 'easeInOut' }
-      };
-    }
     if (motionLevel === 3) {
       return {
         whileHover: { scale: 1.04 },
@@ -318,14 +212,12 @@ export default function Hero({ motionLevel }: HeroProps) {
         transition: { duration: 0.2, ease: 'easeOut' }
       };
     }
-    // L4 and L5: rich springing mechanics
+    // L4: springing mechanics
     return {
       whileHover: { scale: 1.05 },
       whileTap: { scale: 0.95 }
     };
   };
-
-  const isFloatingAction = motionLevel === 5;
 
   if (isL1) {
     return (
@@ -365,32 +257,13 @@ export default function Hero({ motionLevel }: HeroProps) {
 
   return (
     <section 
-      ref={containerRef}
-      onMouseMove={(e) => {
-        if (motionLevel < 5 || !containerRef.current) return;
-        const rect = containerRef.current.getBoundingClientRect();
-        setMousePos({
-          x: e.clientX - rect.left,
-          y: e.clientY - rect.top
-        });
-      }}
-      onMouseLeave={() => setMousePos({ x: -1000, y: -1000 })}
       className="relative w-full min-h-[92vh] flex items-center justify-center px-margin-mobile md:px-margin-desktop py-24 md:py-32 overflow-hidden bg-background"
     >
-      {/* Interactive Cinematic Canvas background for Level 5 */}
-      {motionLevel === 5 && (
-        <canvas 
-          ref={canvasRef} 
-          className="absolute inset-0 z-1 pointer-events-none" 
-        />
-      )}
-
       {/* Background Image with optional interactive Parallax (Level 4+) */}
       <div 
         className="absolute inset-0 z-0 select-none overflow-hidden"
         style={{
-          transform: motionLevel >= 4 ? `translate3d(0, ${scrollY * 0.15}px, 0)` : 'none',
-          transition: isL2 ? 'transform 0.4s ease-out' : 'none'
+          transform: motionLevel >= 4 ? `translate3d(0, ${scrollY * 0.15}px, 0)` : 'none'
         }}
       >
         <img 
@@ -462,14 +335,6 @@ export default function Hero({ motionLevel }: HeroProps) {
         viewport={{ once: true, margin: "-10%"} }
         id="hero-animated-card"
         className={`relative z-10 max-w-3xl mx-auto text-center flex flex-col items-center gap-6 p-8 md:p-16 rounded-[2.5rem] ${motionLevel >= 4 ? 'bg-white/60 backdrop-blur-3xl border border-white/50 shadow-[0_40px_80px_-20px_rgba(0,0,0,0.1)] ring-1 ring-white/70' : 'bg-white/75 backdrop-blur-md border border-primary/10 shadow-xl'} `}
-        animate={isFloatingAction ? {
-          y: [0, -12, 0],
-          transition: {
-            duration: 5,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }
-        } : undefined}
       >
         {/* Little badge tag */}
         <motion.div variants={itemVariants} className="flex flex-col gap-3">

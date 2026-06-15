@@ -14,10 +14,8 @@ export default function Header({ motionLevel, setMotionLevel }: HeaderProps) {
 
   const levels = [
     { num: 1, label: 'L1', title: 'Static Website', desc: 'No animations, instant hovers' },
-    { num: 2, label: 'L2', title: 'Basic Motion', desc: 'Subtle transitions & initial load animations' },
-    { num: 3, label: 'L3', title: 'Interactive Motion', desc: 'Scroll reveals, staggered entry, rich hover shadows/scales' },
-    { num: 4, label: 'L4', title: 'Immersive Motion', desc: 'Parallax scrolls, springs & magnetic buttons' },
-    { num: 5, label: 'L5', title: 'Game-Feel Experience', desc: 'Canvas particles, trailing cursor, floating assets, click sparkles' }
+    { num: 3, label: 'L2', title: 'Interactive Motion', desc: 'Scroll reveals, staggered entry, rich hover shadows/scales' },
+    { num: 4, label: 'L3', title: 'Immersive Motion', desc: 'Parallax scrolls, springs & magnetic buttons' }
   ];
 
   const navLinks = [
@@ -29,7 +27,7 @@ export default function Header({ motionLevel, setMotionLevel }: HeaderProps) {
         { href: '#menu-book-section', label: 'CUSTOM BOX COMPOSITOR' },
       ]
     },
-    { href: '#newsletter', label: 'Join the Club' }
+    { href: '#newsletter', label: 'JOIN MEMBER' }
   ];
 
   // Close dropdown on click outside
@@ -99,7 +97,7 @@ export default function Header({ motionLevel, setMotionLevel }: HeaderProps) {
             className="text-2xl font-bold font-[family-name:theme('fontFamily.headline-md')] text-primary tracking-tight relative cursor-pointer select-none transition-transform"
             style={{
               transform: motionLevel >= 4 ? `translate3d(${logoCoords.x}px, ${logoCoords.y}px, 0)` : 'none',
-              transition: motionLevel === 2 ? 'transform 0.3s ease' : motionLevel >= 3 ? 'transform 0.5s cubic-bezier(0.25, 1, 0.5, 1)' : 'none'
+              transition: motionLevel >= 3 ? 'transform 0.5s cubic-bezier(0.25, 1, 0.5, 1)' : 'none'
             }}
             href="#"
           >
@@ -116,7 +114,7 @@ export default function Header({ motionLevel, setMotionLevel }: HeaderProps) {
                 >
                   {link.label}
                   {/* Modern Underline transition on Hover (Level >= 2) */}
-                  {motionLevel >= 2 && (
+                  {motionLevel >= 3 && (
                     <span className="absolute bottom-0 left-0 w-full h-[1.5px] bg-[#D4A373] origin-bottom-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out" />
                   )}
                 </a>
@@ -158,11 +156,11 @@ export default function Header({ motionLevel, setMotionLevel }: HeaderProps) {
               <button
                 onClick={() => setDropdownOpen(!dropdownOpen)}
                 className={`flex items-center gap-1.5 px-3.5 py-1.5 bg-[#26170c]/5 hover:bg-[#26170c]/10 text-primary border border-primary/10 hover:border-primary/25 text-xs font-semibold rounded-full select-none cursor-pointer ${
-                  motionLevel >= 2 ? 'transition-all duration-300 hover:scale-[1.03] active:scale-[0.98]' : 'transition-none'
+                  motionLevel >= 3 ? 'transition-all duration-300 hover:scale-[1.03] active:scale-[0.98]' : 'transition-none'
                 }`}
               >
-                <Sparkles className={`w-3.5 h-3.5 text-[#7d562d] ${motionLevel === 5 ? 'animate-spin' : 'animate-pulse'}`} />
-                <span className="font-mono text-[11px] font-bold">MODE: L{motionLevel}</span>
+                <Sparkles className={`w-3.5 h-3.5 text-[#7d562d] animate-pulse`} />
+                <span className="font-mono text-[11px] font-bold">MODE: {activeLevelInfo.label}</span>
                 <span className="hidden sm:inline-block text-[11px] opacity-80 border-l border-primary/10 pl-1.5 ml-0.5">
                   {activeLevelInfo.title}
                 </span>
@@ -173,10 +171,10 @@ export default function Header({ motionLevel, setMotionLevel }: HeaderProps) {
               <AnimatePresence>
                 {dropdownOpen && (
                   <motion.div
-                    initial={motionLevel >= 2 ? { opacity: 0, y: 8, scale: 0.95 } : undefined}
-                    animate={motionLevel >= 2 ? { opacity: 1, y: 0, scale: 1 } : undefined}
-                    exit={motionLevel >= 2 ? { opacity: 0, y: 8, scale: 0.95 } : undefined}
-                    transition={{ duration: motionLevel >= 3 ? 0.2 : motionLevel === 2 ? 0.12 : 0, ease: 'easeOut' }}
+                    initial={motionLevel >= 3 ? { opacity: 0, y: 8, scale: 0.95 } : undefined}
+                    animate={motionLevel >= 3 ? { opacity: 1, y: 0, scale: 1 } : undefined}
+                    exit={motionLevel >= 3 ? { opacity: 0, y: 8, scale: 0.95 } : undefined}
+                    transition={{ duration: motionLevel >= 3 ? 0.2 : 0, ease: 'easeOut' }}
                     className="absolute right-0 mt-2 w-72 bg-white rounded-2xl shadow-xl border border-primary/5 overflow-hidden z-50 p-2"
                   >
                     <div className="px-3 py-2 border-b border-primary/5 mb-1 text-left">
@@ -202,7 +200,7 @@ export default function Header({ motionLevel, setMotionLevel }: HeaderProps) {
                               <span className={`text-[9px] font-mono font-bold px-1 rounded ${
                                 isActive ? 'bg-secondary-fixed text-primary' : 'bg-primary/10 text-primary'
                               }`}>
-                                L{lvl.num}
+                                {lvl.label}
                               </span>
                               <span className="text-xs font-bold">{lvl.title}</span>
                             </div>
@@ -224,7 +222,7 @@ export default function Header({ motionLevel, setMotionLevel }: HeaderProps) {
             <button 
               aria-label="shopping_cart" 
               className={`text-primary flex items-center justify-center p-1 rounded-full ${
-                motionLevel >= 2 ? 'hover:scale-110 active:scale-95 hover:bg-primary/5 transition-all duration-200' : 'transition-none'
+                motionLevel >= 3 ? 'hover:scale-110 active:scale-95 hover:bg-primary/5 transition-all duration-200' : 'transition-none'
               }`}
             >
               <ShoppingCart className="w-5 h-5" />
@@ -250,7 +248,7 @@ export default function Header({ motionLevel, setMotionLevel }: HeaderProps) {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: motionLevel >= 3 ? 0.3 : motionLevel === 2 ? 0.15 : 0 }}
+            transition={{ duration: motionLevel >= 3 ? 0.3 : 0 }}
             className="md:hidden w-full bg-background border-b border-primary/10 overflow-hidden z-40 sticky top-[84px] shadow-lg text-left"
           >
             <div className="px-margin-mobile py-5 flex flex-col gap-4">

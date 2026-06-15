@@ -59,7 +59,6 @@ export default function Newsletter({ motionLevel }: NewsletterProps) {
   };
 
   const isL1 = motionLevel === 1;
-  const isL2 = motionLevel === 2;
 
   if (isL1) {
     return (
@@ -102,20 +101,12 @@ export default function Newsletter({ motionLevel }: NewsletterProps) {
       y: 0,
       transition: motionLevel >= 4
         ? { type: 'spring', stiffness: 85, damping: 15 }
-        : isL2
-        ? { type: 'tween', ease: 'easeOut', duration: 0.8 } // Beautiful smooth tween slide up for Level 2
         : { duration: 0.6, ease: 'easeOut' }
     }
   };
 
   const buttonHoverProps = () => {
     if (isL1) return {};
-    if (isL2) {
-      return {
-        whileHover: { scale: 1.025 },
-        transition: { type: 'tween', duration: 0.2, ease: 'easeInOut' }
-      };
-    }
     if (motionLevel === 3) {
       return {
         whileHover: { scale: 1.03 },
@@ -123,7 +114,7 @@ export default function Newsletter({ motionLevel }: NewsletterProps) {
         transition: { duration: 0.2, ease: 'easeOut' }
       };
     }
-    // Level 4 / 5
+    // Level 4
     return {
       whileHover: { scale: 1.04 },
       whileTap: { scale: 0.96 }

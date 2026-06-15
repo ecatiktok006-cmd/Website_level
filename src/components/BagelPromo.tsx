@@ -94,8 +94,6 @@ export default function BagelPromo({ motionLevel }: BagelPromoProps) {
     }, 2000);
   };
 
-  const isL1 = motionLevel === 1;
-
   // Immersive Menu Book state representation
   const [activeSpread, setActiveSpread] = useState<number>(0); // 0: Directory, 1: Sets, 2: Sourdough
   const [direction, setDirection] = useState<number>(0);
@@ -139,87 +137,6 @@ export default function BagelPromo({ motionLevel }: BagelPromoProps) {
 
   const totalBoxCount = (Object.values(customBox) as number[]).reduce((a, b) => a + b, 0);
   const finalBoxPrice = totalBoxCount === 6 ? totalBoxPrice * 0.9 : totalBoxPrice; // 10% discount if full box of 6
-
-  // Clean Level 1 rendering for static mode (no animations)
-  if (isL1) {
-    return (
-      <section 
-        id="menu-book-section" 
-        className="relative py-24 px-margin-mobile md:px-margin-desktop bg-[#faf9f6] text-[#26170c] w-full overflow-hidden"
-      >
-        <div className="absolute inset-0 w-full h-full overflow-hidden z-0 pointer-events-none">
-          <img
-            src="/bg.png"
-            alt="Bakery background"
-            className="w-full h-full object-cover opacity-10 filter brightness-[1.1]"
-            referrerPolicy="no-referrer"
-          />
-        </div>
-
-        <div className="max-w-[1200px] mx-auto relative z-10">
-          <div className="text-center max-w-2xl mx-auto mb-16">
-            <span className="text-xs uppercase tracking-widest font-mono text-[#7d562d] font-semibold px-3 py-1 rounded-full bg-[#7d562d]/10 border border-[#7d562d]/20">
-              THE FLOUR-PROOFED MENU BOOK
-            </span>
-            <h2 className="text-4xl md:text-5xl font-black font-sans mt-4 mb-6 leading-tight tracking-tight text-[#26170c]">
-              Aromatic Cinnamon Swirls
-            </h2>
-            <p className="text-sm font-light text-[#4f453f] leading-relaxed">
-              Every single swirl in our gourmet fleet is hand-poured from custom natural flours. Flip through our classic selection to order your favorites individually or compose a custom box of six.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {cinnamonRolls.map((roll) => (
-              <div 
-                key={roll.id}
-                className="bg-white rounded-2xl p-6 border border-[#26170c]/10 relative flex flex-col justify-between h-full transition-all duration-300 shadow-sm"
-              >
-                <div>
-                  <div className="flex justify-between items-start mb-4">
-                    <span className="text-[10px] uppercase font-mono tracking-wider px-2.5 py-1 rounded bg-[#7d562d]/10 text-[#7d562d] font-bold border border-transparent">
-                      {roll.tag}
-                    </span>
-                    <span className="text-[10px] font-mono font-medium text-[#26170c]/50 tracking-widest italic uppercase">
-                      "{roll.writing}"
-                    </span>
-                  </div>
-
-                  <div className="w-full h-44 overflow-hidden rounded-xl bg-neutral-100 border border-[#26170c]/10 mb-5">
-                    <img 
-                      src={roll.image} 
-                      alt={roll.title} 
-                      className="w-full h-full object-cover" 
-                      referrerPolicy="no-referrer"
-                    />
-                  </div>
-
-                  <h3 className="text-xl font-bold text-[#26170c] mb-2 tracking-tight">
-                    {roll.title}
-                  </h3>
-                  <p className="text-xs text-[#4f453f] mb-6 font-light leading-relaxed">
-                    {roll.desc}
-                  </p>
-                </div>
-
-                <div className="flex justify-between items-center pt-4 border-t border-[#26170c]/10 mt-auto">
-                  <span className="text-lg font-black text-[#7d562d] font-mono leading-none">
-                    {roll.price}
-                  </span>
-                  <button 
-                    onClick={(e) => addToCart(roll.id, e)}
-                    className="px-4 py-2 bg-[#26170c] text-white text-xs font-bold uppercase rounded-lg cursor-pointer hover:bg-[#7d562d] transition-colors"
-                  >
-                    {addedToCart[roll.id] ? 'ADDED!' : 'ORDER NOW'}
-                  </button>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-    );
-  }
 
   // Active Interactive / Immersive Multi-Level Rendering
   return (
@@ -290,10 +207,7 @@ export default function BagelPromo({ motionLevel }: BagelPromoProps) {
           
           {/* Leather Cover with paper-shadow and rounded profile edges */}
           <div 
-            className="rounded-[24px] p-2.5 md:p-6 shadow-[0_30px_70px_-15px_rgba(0,0,0,0.85)] relative overflow-hidden bg-cover bg-center border border-[#3e2413]/55"
-            style={{
-              backgroundImage: "url('https://lh3.googleusercontent.com/aida-public/AB6AXuC6TODvZ9Lwbn-4m-_pBz0fRBm883N1MNd7AcxKdZxS8wsJo1fb7RheqPeJCcna7zrFOhydHKtIJc1aS2BKOscLNzepichJbkNvtYna-RkRpuB711feJLroxt1UckvM-PWhPfiAEEEGounBIvK9PCefKCN1Y-QfTUyhG7S4QLt-zFezPxrKJ-vbGUz5kmi0dCKZk1-c7OLeISvSzJMR3B0xS9llGNz0XviQHU4xLQbNoExq1NceVfAjvQcKxWvjot3-qJOip8j5X0g')"
-            }}
+            className="rounded-[24px] p-2.5 md:p-6 shadow-[0_30px_70px_-15px_rgba(0,0,0,0.85)] relative overflow-hidden bg-[#2c1a0e] border border-[#3e2413]/55"
           >
             {/* Soft inner shadow of the leather fold */}
             <div className="absolute inset-0 bg-[#28180d]/40 mix-blend-color-burn pointer-events-none rounded-[24px]" />
@@ -352,12 +266,10 @@ export default function BagelPromo({ motionLevel }: BagelPromoProps) {
                     ? { opacity: 0, rotateY: direction === 1 ? -90 : 90, scale: 0.9 }
                     : {}}
                   transition={{ type: "spring", stiffness: 120, damping: 20 }}
-                  className="flex flex-col md:flex-row min-h-[760px] md:min-h-[810px] h-full text-[#26170c] w-full transform-gpu"
+                  className="flex flex-col md:flex-row min-h-[760px] md:min-h-[810px] h-full text-[#26170c] w-full transform-gpu bg-[#faf9f6]"
                   style={{
                     perspective: 1500,
-                    transformOrigin: 'center',
-                    backgroundImage: "url('https://lh3.googleusercontent.com/aida-public/AB6AXuCDTudGehFn6wlnWJXD9qpHcFssvEvEsi2T9F1MnKQGbOmBmfSmLN1KkEHWbz-BgAQ7U0dS884Qkgq_PDSSOtxspu9VucFZGBT5yCHVG-_yRBd_0C9F0cdYUll10rEOv0Q_TOzhVkakF2vw0AbHBhTzwnLyC-aooDAbnGzSGIsaEigfCn_AggkIujmpk8PbUOniZMscPSWNr9QL0j_z00ZB7VUGHnZ1CkQhSpOzPpkd-fa02v1w9oO6_Y2PFG6FVlRbS5U9jaeGjww')",
-                    backgroundSize: "cover"
+                    transformOrigin: 'center'
                   }}
                 >
 
@@ -851,14 +763,23 @@ export default function BagelPromo({ motionLevel }: BagelPromoProps) {
 
                         {/* Feature Video Header */}
                         <div className="w-full h-64 md:h-80 lg:h-[360px] rounded-2xl overflow-hidden relative mb-6 shadow-md border border-[#26170c]/10">
-                          <video 
-                            src="/redvelvetsoftcookies.mp4" 
-                            className="w-full h-full object-cover origin-center hover:scale-105 transition-transform duration-700" 
-                            autoPlay 
-                            loop 
-                            muted 
-                            playsInline 
-                          />
+                          {motionLevel === 1 ? (
+                            <img 
+                              src="https://images.unsplash.com/photo-1499636136210-6f4ee915583e?auto=format&fit=crop&q=80&w=1000"
+                              alt="Soft Cookies"
+                              className="w-full h-full object-cover origin-center hover:scale-105 transition-transform duration-700"
+                              referrerPolicy="no-referrer"
+                            />
+                          ) : (
+                            <video 
+                              src="/redvelvetsoftcookies.mp4" 
+                              className="w-full h-full object-cover origin-center hover:scale-105 transition-transform duration-700" 
+                              autoPlay 
+                              loop 
+                              muted 
+                              playsInline 
+                            />
+                          )}
                           <div className="absolute inset-0 bg-gradient-to-t from-[#26170c]/90 via-[#26170c]/20 to-transparent flex flex-col justify-end p-4 md:p-6">
                             <span className="text-[10px] text-[#ffca98] font-mono uppercase tracking-widest font-bold mb-1 drop-shadow-md">Baked Daily</span>
                             <h4 className="text-white font-serif text-2xl md:text-3xl font-bold leading-tight drop-shadow-lg">Gourmet Cookie Collection</h4>
