@@ -7,6 +7,7 @@ import { useState, useEffect, useRef } from 'react';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import BagelPromo from './components/BagelPromo';
+import Newsletter from './components/Newsletter';
 import Footer from './components/Footer';
 
 interface Particle {
@@ -22,8 +23,8 @@ interface Particle {
 
 export default function App() {
   // Motion Selector State - Active level which coordinates across all components
-  // Defaults to Level 4 (Immersive Motion) as requested by the user!
-  const [motionLevel, setMotionLevel] = useState<number>(4);
+  // Defaults to Level 3 (Interactive Motion) as a highly premium baseline showcase!
+  const [motionLevel, setMotionLevel] = useState<number>(3);
 
   // Scroll to the top of the page whenever the animation style or level changes
   useEffect(() => {
@@ -176,6 +177,7 @@ export default function App() {
       <main>
         <Hero motionLevel={motionLevel} />
         <BagelPromo motionLevel={motionLevel} />
+        <Newsletter motionLevel={motionLevel} />
       </main>
       <Footer />
     </div>

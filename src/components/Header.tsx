@@ -28,7 +28,8 @@ export default function Header({ motionLevel, setMotionLevel }: HeaderProps) {
         { href: '#menu-book-section', label: 'SIGNATURE SWIRLS' },
         { href: '#menu-book-section', label: 'CUSTOM BOX COMPOSITOR' },
       ]
-    }
+    },
+    { href: '#newsletter', label: 'Join the Club' }
   ];
 
   // Close dropdown on click outside
