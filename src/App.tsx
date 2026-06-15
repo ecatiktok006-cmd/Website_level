@@ -22,8 +22,8 @@ interface Particle {
 
 export default function App() {
   // Motion Selector State - Active level which coordinates across all components
-  // Defaults to Level 3 (Interactive Motion) as a highly premium baseline showcase!
-  const [motionLevel, setMotionLevel] = useState<number>(3);
+  // Defaults to Level 4 (Immersive Motion) as requested by the user!
+  const [motionLevel, setMotionLevel] = useState<number>(4);
 
   // Scroll to the top of the page whenever the animation style or level changes
   useEffect(() => {

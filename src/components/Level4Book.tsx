@@ -1,8 +1,8 @@
-import React, { forwardRef, useRef, useState, useEffect } from 'react';
-import HTMLFlipBook from 'react-pageflip';
+import React, { forwardRef, useRef, useState, useEffect, Suspense } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Sparkles, ChevronLeft, ChevronRight, Check } from 'lucide-react';
 import bagelBg from '../assets/images/bagel_background_1781232798138.jpg';
+import FlipBookWrapper from './FlipBookWrapper';
 
 interface Level4BookProps {
   cinnamonRolls: any[];
@@ -136,7 +136,7 @@ export default function Level4Book({
         )}
 
         {/* @ts-ignore */}
-        <HTMLFlipBook
+        <FlipBookWrapper
           width={isMobile ? Math.max(300, Math.min(innerWidth - 12, 340)) : 550}
           height={isMobile ? 520 : 750}
           size="stretch"
@@ -147,7 +147,7 @@ export default function Level4Book({
           maxShadowOpacity={0.4}
           showCover={true}
           mobileScrollSupport={true}
-          className="shadow-2xl shadow-black/60 rounded-xl overflow-hidden"
+          className="shadow-2xl shadow-black/60 rounded-xl overflow-hidden max-w-[1100px] mx-auto"
           ref={bookRef}
           usePortrait={isMobile}
           startPage={0}
@@ -589,7 +589,7 @@ export default function Level4Book({
                <p className="font-sans text-[8px] tracking-[0.4em] uppercase text-[#E3CBB3]/50">Finis</p>
             </div>
           </Page>
-        </HTMLFlipBook>
+        </FlipBookWrapper>
 
         {currentPage < 11 && (
           <button 
